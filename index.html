@@ -5,273 +5,91 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MYCLIPS - Premium Apps Store</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
-  <!-- Midtrans Snap (sandbox) -->
   <script src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client-0bO4AvipKr4ASqQw"></script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { font-family: 'Poppins', sans-serif; }
-    
-    .texture-bg {
-      background-color: #FFF0F5;
-      background-image: 
-        radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.4) 0%, transparent 40%),
-        radial-gradient(circle at 40% 80%, rgba(255, 174, 185, 0.25) 0%, transparent 45%),
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
-    }
-    
-    .card-texture {
-      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,245,250,0.9) 100%);
-      backdrop-filter: blur(10px);
-    }
-    
-    .price-tag {
-      background: linear-gradient(135deg, #FF6B9D 0%, #FF8FAB 100%);
-    }
-    
-    .btn-checkout {
-      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
-      transition: all 0.3s ease;
-    }
-    
-    .btn-checkout:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
-    }
-    
-    .product-card {
-      transition: all 0.3s ease;
-    }
-    
-    .product-card:hover {
-      transform: translateY(-5px);
-    }
-    
-    .package-option {
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-    
-    .package-option:hover {
-      border-color: #FF6B9D;
-      background: rgba(255, 107, 157, 0.05);
-    }
-    
-    .package-option.selected {
-      border-color: #FF6B9D;
-      background: linear-gradient(135deg, rgba(255, 107, 157, 0.1) 0%, rgba(255, 143, 171, 0.1) 100%);
-    }
-    
-    .modal-overlay {
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(5px);
-    }
-    
-    .strikethrough {
-      text-decoration: line-through;
-      opacity: 0.6;
-    }
-    
-    .discount-badge {
-      background: linear-gradient(135deg, #FF4757 0%, #FF6B81 100%);
-    }
-    
-    .floating-hearts {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      pointer-events: none;
-    }
-    
-    .heart {
-      position: absolute;
-      font-size: 20px;
-      opacity: 0.1;
-      animation: float 15s infinite ease-in-out;
-    }
-    
-    @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-20px) rotate(10deg); }
-    }
-    
-    .toast {
-      animation: slideIn 0.3s ease;
-    }
-    
-    @keyframes slideIn {
-      from { transform: translateX(100%); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-
-    .tab-button {
-      transition: all 0.3s ease;
-    }
-
-    .tab-button.active {
-      background: linear-gradient(135deg, #FF6B9D 0%, #FF8FAB 100%);
-      color: white;
-    }
-
-    .tab-button:not(.active) {
-      background: transparent;
-      color: #999;
-    }
-
-    .order-item {
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; }
-      to { opacity: 1; }
-    }
-
-    .status-badge {
-      display: inline-block;
-      padding: 0.25rem 0.75rem;
-      border-radius: 9999px;
-      font-size: 0.75rem;
-      font-weight: 600;
-    }
-
-    .status-pending {
-      background: rgba(255, 193, 7, 0.2);
-      color: #F57C00;
-    }
-
-    .status-completed {
-      background: rgba(76, 175, 80, 0.2);
-      color: #2E7D32;
-    }
-
-    .info-tooltip {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .info-tooltip:hover .tooltip-text {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .tooltip-text {
-      position: absolute;
-      bottom: auto;
-      top: -80px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: rgba(0, 0, 0, 0.9);
-      color: white;
-      padding: 0.5rem 0.75rem;
-      border-radius: 0.5rem;
-      font-size: 0.75rem;
-      white-space: nowrap;
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.3s ease;
-      z-index: 50;
-    }
-
-    .tooltip-text::after {
-      content: '';
-      position: absolute;
-      bottom: -4px;
-      left: 50%;
-      transform: translateX(-50%);
-      border: 4px solid transparent;
-      border-top-color: rgba(0, 0, 0, 0.9);
-    }
-
-    .sort-btn.active {
-      background: linear-gradient(135deg, #FF6B9D 0%, #FF8FAB 100%);
-      color: white;
-      border-color: #FF6B9D;
-    }
+    .texture-bg { background-color:#FFF0F5; background-image:radial-gradient(circle at 20% 50%,rgba(255,182,193,0.3) 0%,transparent 50%),radial-gradient(circle at 80% 20%,rgba(255,192,203,0.4) 0%,transparent 40%),radial-gradient(circle at 40% 80%,rgba(255,174,185,0.25) 0%,transparent 45%),url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); }
+    .card-texture { background:linear-gradient(135deg,rgba(255,255,255,0.95) 0%,rgba(255,245,250,0.9) 100%); backdrop-filter:blur(10px); }
+    .price-tag { background:linear-gradient(135deg,#FF6B9D 0%,#FF8FAB 100%); }
+    .btn-checkout { background:linear-gradient(135deg,#25D366 0%,#128C7E 100%); transition:all 0.3s ease; }
+    .btn-checkout:hover { transform:translateY(-2px); box-shadow:0 8px 25px rgba(37,211,102,0.4); }
+    .product-card { transition:all 0.3s ease; }
+    .product-card:hover { transform:translateY(-5px); }
+    .package-option { transition:all 0.2s ease; cursor:pointer; }
+    .package-option:hover { border-color:#FF6B9D; background:rgba(255,107,157,0.05); }
+    .package-option.selected { border-color:#FF6B9D; background:linear-gradient(135deg,rgba(255,107,157,0.1) 0%,rgba(255,143,171,0.1) 100%); }
+    .modal-overlay { background:rgba(0,0,0,0.5); backdrop-filter:blur(5px); }
+    .strikethrough { text-decoration:line-through; opacity:0.6; }
+    .discount-badge { background:linear-gradient(135deg,#FF4757 0%,#FF6B81 100%); }
+    .floating-hearts { position:absolute; width:100%; height:100%; overflow:hidden; pointer-events:none; }
+    .heart { position:absolute; font-size:20px; opacity:0.1; animation:float 15s infinite ease-in-out; }
+    @keyframes float { 0%,100%{transform:translateY(0) rotate(0deg);} 50%{transform:translateY(-20px) rotate(10deg);} }
+    .toast { animation:slideIn 0.3s ease; }
+    @keyframes slideIn { from{transform:translateX(100%);opacity:0;} to{transform:translateX(0);opacity:1;} }
+    .tab-button { transition:all 0.3s ease; }
+    .tab-button.active { background:linear-gradient(135deg,#FF6B9D 0%,#FF8FAB 100%); color:white; }
+    .tab-button:not(.active) { background:transparent; color:#999; }
+    .order-item { animation:fadeIn 0.3s ease; }
+    @keyframes fadeIn { from{opacity:0;} to{opacity:1;} }
+    .status-badge { display:inline-block; padding:0.25rem 0.75rem; border-radius:9999px; font-size:0.75rem; font-weight:600; }
+    .status-pending { background:rgba(255,193,7,0.2); color:#F57C00; }
+    .status-completed { background:rgba(76,175,80,0.2); color:#2E7D32; }
+    .info-tooltip { position:relative; display:inline-flex; align-items:center; justify-content:center; }
+    .info-tooltip:hover .tooltip-text { opacity:1; visibility:visible; }
+    .tooltip-text { position:absolute; bottom:auto; top:-80px; left:50%; transform:translateX(-50%); background:rgba(0,0,0,0.9); color:white; padding:0.5rem 0.75rem; border-radius:0.5rem; font-size:0.75rem; white-space:nowrap; opacity:0; visibility:hidden; transition:all 0.3s ease; z-index:50; }
+    .tooltip-text::after { content:''; position:absolute; bottom:-4px; left:50%; transform:translateX(-50%); border:4px solid transparent; border-top-color:rgba(0,0,0,0.9); }
+    .sort-btn.active { background:linear-gradient(135deg,#FF6B9D 0%,#FF8FAB 100%); color:white; border-color:#FF6B9D; }
   </style>
 </head>
 <body class="h-full">
   <div class="h-full overflow-auto texture-bg relative">
     <div class="floating-hearts">
-      <span class="heart" style="left: 5%; top: 10%; animation-delay: 0s;">💕</span>
-      <span class="heart" style="left: 15%; top: 60%; animation-delay: 2s;">💗</span>
-      <span class="heart" style="left: 25%; top: 30%; animation-delay: 4s;">💖</span>
-      <span class="heart" style="left: 45%; top: 70%; animation-delay: 1s;">💕</span>
-      <span class="heart" style="left: 65%; top: 20%; animation-delay: 3s;">💗</span>
-      <span class="heart" style="left: 75%; top: 50%; animation-delay: 5s;">💖</span>
-      <span class="heart" style="left: 85%; top: 80%; animation-delay: 2.5s;">💕</span>
-      <span class="heart" style="left: 95%; top: 40%; animation-delay: 4.5s;">💗</span>
+      <span class="heart" style="left:5%;top:10%;animation-delay:0s;">💕</span>
+      <span class="heart" style="left:15%;top:60%;animation-delay:2s;">💗</span>
+      <span class="heart" style="left:25%;top:30%;animation-delay:4s;">💖</span>
+      <span class="heart" style="left:45%;top:70%;animation-delay:1s;">💕</span>
+      <span class="heart" style="left:65%;top:20%;animation-delay:3s;">💗</span>
+      <span class="heart" style="left:75%;top:50%;animation-delay:5s;">💖</span>
+      <span class="heart" style="left:85%;top:80%;animation-delay:2.5s;">💕</span>
+      <span class="heart" style="left:95%;top:40%;animation-delay:4.5s;">💗</span>
     </div>
-
     <div id="toast-container" class="fixed top-4 right-4 z-50 flex flex-col gap-2"></div>
-
     <header class="relative z-10 py-6 px-4 border-b border-pink-200">
       <div class="max-w-4xl mx-auto">
-        <div class="text-center mb-6">
-          <h1 class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-pink-500 via-pink-400 to-rose-400 bg-clip-text text-transparent drop-shadow-sm">MYCLIPS</h1>
-          <p class="text-pink-400 font-medium mt-1 tracking-wide">✨ Premium Apps Store ✨</p>
-        </div>
+        <div class="text-center mb-6"><h1 class="text-4xl md:text-5xl font-extrabold bg-gradient-to-r from-pink-500 via-pink-400 to-rose-400 bg-clip-text text-transparent drop-shadow-sm">MYCLIPS</h1><p class="text-pink-400 font-medium mt-1 tracking-wide">✨ Premium Apps Store ✨</p></div>
         <div class="flex gap-4 justify-center border-b border-pink-100">
           <button class="tab-button active px-6 py-3 font-semibold rounded-t-xl transition-all" data-tab="products">🛍️ Products</button>
           <button class="tab-button px-6 py-3 font-semibold rounded-t-xl transition-all" data-tab="history">📋 Order History</button>
         </div>
       </div>
     </header>
-
     <main class="relative z-10 px-4 pb-8">
       <div class="max-w-4xl mx-auto">
         <div id="products-tab" class="tab-content">
           <p class="text-gray-500 text-sm mt-3 mb-6 text-center">Dapatkan akses premium dengan harga terjangkau! DIJAMIN GARANSI 100%!</p>
           <div class="grid md:grid-cols-3 gap-6">
-            <!-- Canva Premium -->
+            <!-- Canva -->
             <div class="product-card card-texture rounded-3xl shadow-lg shadow-pink-200/40 overflow-hidden border border-pink-100">
-              <div class="relative">
-                <div class="absolute top-3 right-3 z-20">
-                  <div class="info-tooltip">
-                    <button class="text-pink-500 hover:bg-pink-100 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold border-2 border-pink-300 bg-white">i</button>
-                    <span class="tooltip-text">Edit desain unlimited, template premium, kolaborasi tim</span>
-                  </div>
-                </div>
-                <div class="price-tag text-white text-center py-3 flex items-center justify-center gap-2 pr-8">
-                  <span class="text-2xl">🎨</span>
-                  <h2 class="font-bold text-lg">Canva Premium</h2>
-                </div>
-              </div>
+              <div class="relative"><div class="absolute top-3 right-3 z-20"><div class="info-tooltip"><button class="text-pink-500 hover:bg-pink-100 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold border-2 border-pink-300 bg-white">i</button><span class="tooltip-text">Edit desain unlimited, template premium, kolaborasi tim</span></div></div><div class="price-tag text-white text-center py-3 flex items-center justify-center gap-2 pr-8"><span class="text-2xl">🎨</span><h2 class="font-bold text-lg">Canva Premium</h2></div></div>
               <div class="p-5 space-y-3">
-                <div class="package-option rounded-xl border-2 border-pink-200 p-3" data-product="Canva Premium" data-package="1 Bulan" data-price="3000" data-needs-email="true">
-                  <div class="flex justify-between items-center"><div><p class="font-semibold text-gray-700">1 Bulan</p><p class="text-xs text-gray-500 mt-1">👤 1 akun</p></div><div class="text-right"><p class="font-bold text-pink-500 text-lg">Rp 3K</p></div></div>
-                </div>
-                <div class="package-option rounded-xl border-2 border-pink-200 p-3 relative" data-product="Canva Premium" data-package="3 Bulan" data-price="8000" data-needs-email="true">
-                  <div class="discount-badge absolute -top-2 -right-2 text-white text-xs px-2 py-1 rounded-full font-bold">PROMO</div>
-                  <div class="flex justify-between items-center"><div><p class="font-semibold text-gray-700">3 Bulan</p><p class="text-xs text-gray-500 mt-1">👤 1 akun</p></div><div class="text-right"><span class="text-gray-400 text-sm strikethrough">Rp 9K</span><p class="font-bold text-pink-500 text-lg">Rp 8K</p></div></div>
-                </div>
-                <div class="package-option rounded-xl border-2 border-pink-200 p-3 relative" data-product="Canva Premium" data-package="Paket Grup (15 akun)/Bulan" data-price="10000" data-needs-email="true">
-                  <div class="discount-badge absolute -top-2 -right-2 text-white text-xs px-2 py-1 rounded-full font-bold">HEMAT</div>
-                  <div class="flex justify-between items-center"><div><p class="font-semibold text-gray-700">Paket Grup</p><p class="text-xs text-gray-500">(15 akun) /bulan</p></div><div class="text-right"><span class="text-gray-400 text-sm strikethrough">Rp 25K</span><p class="font-bold text-pink-500 text-lg">Rp 10K</p></div></div>
-                </div>
+                <div class="package-option rounded-xl border-2 border-pink-200 p-3" data-product="Canva Premium" data-package="1 Bulan" data-price="3000" data-needs-email="true"><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-700">1 Bulan</p><p class="text-xs text-gray-500 mt-1">👤 1 akun</p></div><div class="text-right"><p class="font-bold text-pink-500 text-lg">Rp 3K</p></div></div></div>
+                <div class="package-option rounded-xl border-2 border-pink-200 p-3 relative" data-product="Canva Premium" data-package="3 Bulan" data-price="8000" data-needs-email="true"><div class="discount-badge absolute -top-2 -right-2 text-white text-xs px-2 py-1 rounded-full font-bold">PROMO</div><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-700">3 Bulan</p><p class="text-xs text-gray-500 mt-1">👤 1 akun</p></div><div class="text-right"><span class="text-gray-400 text-sm strikethrough">Rp 9K</span><p class="font-bold text-pink-500 text-lg">Rp 8K</p></div></div></div>
+                <div class="package-option rounded-xl border-2 border-pink-200 p-3 relative" data-product="Canva Premium" data-package="Paket Grup (15 akun)/Bulan" data-price="10000" data-needs-email="true"><div class="discount-badge absolute -top-2 -right-2 text-white text-xs px-2 py-1 rounded-full font-bold">HEMAT</div><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-700">Paket Grup</p><p class="text-xs text-gray-500">(15 akun) /bulan</p></div><div class="text-right"><span class="text-gray-400 text-sm strikethrough">Rp 25K</span><p class="font-bold text-pink-500 text-lg">Rp 10K</p></div></div></div>
               </div>
             </div>
-            <!-- CapCut Premium -->
+            <!-- CapCut -->
             <div class="product-card card-texture rounded-3xl shadow-xl shadow-pink-200/50 overflow-hidden border border-pink-100">
-              <div class="relative">
-                <div class="absolute top-3 right-3 z-20"><div class="info-tooltip"><button class="text-pink-500 hover:bg-pink-100 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold border-2 border-pink-300 bg-white">i</button><span class="tooltip-text">Edit video tanpa watermark, effect premium, export 4K</span></div></div>
-                <div class="price-tag text-white text-center py-3 flex items-center justify-center gap-2 pr-8"><span class="text-2xl">🎬</span><h2 class="font-bold text-lg">CapCut Premium</h2></div>
-              </div>
+              <div class="relative"><div class="absolute top-3 right-3 z-20"><div class="info-tooltip"><button class="text-pink-500 hover:bg-pink-100 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold border-2 border-pink-300 bg-white">i</button><span class="tooltip-text">Edit video tanpa watermark, effect premium, export 4K</span></div></div><div class="price-tag text-white text-center py-3 flex items-center justify-center gap-2 pr-8"><span class="text-2xl">🎬</span><h2 class="font-bold text-lg">CapCut Premium</h2></div></div>
               <div class="p-5 space-y-3">
                 <div class="package-option rounded-xl border-2 border-pink-200 p-3" data-product="CapCut Premium" data-package="7 Hari" data-price="6000" data-is-capcut="true"><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-700">7 Hari</p><p class="text-xs text-gray-500 mt-1">🔒 Privat</p></div><div class="text-right"><p class="font-bold text-pink-500 text-lg">Rp 6K</p></div></div></div>
                 <div class="package-option rounded-xl border-2 border-pink-200 p-3 relative" data-product="CapCut Premium" data-package="14 Hari" data-price="11000" data-is-capcut="true"><div class="discount-badge absolute -top-2 -right-2 text-white text-xs px-2 py-1 rounded-full font-bold">PROMO</div><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-700">14 Hari</p><p class="text-xs text-gray-500 mt-1">🔒 Privat</p></div><div class="text-right"><span class="text-gray-400 text-sm strikethrough">Rp 12K</span><p class="font-bold text-pink-500 text-lg">Rp 11K</p></div></div></div>
                 <div class="package-option rounded-xl border-2 border-pink-200 p-3 relative" data-product="CapCut Premium" data-package="1 Bulan" data-price="20000" data-is-capcut="true"><div class="discount-badge absolute -top-2 -right-2 text-white text-xs px-2 py-1 rounded-full font-bold">BEST</div><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-700">1 Bulan</p><p class="text-xs text-gray-500 mt-1">🔒 Privat</p></div><div class="text-right"><span class="text-gray-400 text-sm strikethrough">Rp 25K</span><p class="font-bold text-pink-500 text-lg">Rp 20K</p></div></div></div>
               </div>
             </div>
-            <!-- ChatGPT Pro -->
+            <!-- ChatGPT -->
             <div class="product-card card-texture rounded-3xl shadow-xl shadow-pink-200/50 overflow-hidden border border-pink-100">
-              <div class="relative">
-                <div class="absolute top-3 right-3 z-20"><div class="info-tooltip"><button class="text-pink-500 hover:bg-pink-100 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold border-2 border-pink-300 bg-white">i</button><span class="tooltip-text">GPT-5 Turbo, Thinking mode, priority support</span></div></div>
-                <div class="price-tag text-white text-center py-3 flex items-center justify-center gap-2 pr-8"><span class="text-2xl">🤖</span><h2 class="font-bold text-lg">ChatGPT Pro</h2></div>
-              </div>
+              <div class="relative"><div class="absolute top-3 right-3 z-20"><div class="info-tooltip"><button class="text-pink-500 hover:bg-pink-100 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold border-2 border-pink-300 bg-white">i</button><span class="tooltip-text">GPT-5 Turbo, Thinking mode, priority support</span></div></div><div class="price-tag text-white text-center py-3 flex items-center justify-center gap-2 pr-8"><span class="text-2xl">🤖</span><h2 class="font-bold text-lg">ChatGPT Pro</h2></div></div>
               <div class="px-5 pt-3 pb-1"><p class="text-xs text-center text-gray-500 bg-pink-50 rounded-lg py-1">Include: GPT Pro, Thinking, Instan</p></div>
               <div class="p-5 pt-3 space-y-3">
                 <div class="package-option rounded-xl border-2 border-pink-200 p-3 relative" data-product="ChatGPT Pro" data-package="15 Hari" data-price="10000" data-needs-email="true"><div class="discount-badge absolute -top-2 -right-2 text-white text-xs px-2 py-1 rounded-full font-bold">PROMO</div><div class="flex justify-between items-center"><div><p class="font-semibold text-gray-700">15 Hari</p><p class="text-xs text-gray-500 mt-1">👤 1 akun</p></div><div class="text-right"><span class="text-gray-400 text-sm strikethrough">Rp 15K</span><p class="font-bold text-pink-500 text-lg">Rp 10K</p></div></div></div>
@@ -280,437 +98,108 @@
             </div>
           </div>
         </div>
-
         <div id="history-tab" class="tab-content hidden">
-          <div class="mt-6">
-            <div class="flex justify-end mb-4 gap-2">
-              <button id="sort-newest-btn" class="sort-btn active px-4 py-2 rounded-xl border border-pink-200 bg-white text-pink-500 font-semibold text-sm hover:bg-pink-50 transition">⬇️ Terbaru</button>
-              <button id="sort-oldest-btn" class="sort-btn px-4 py-2 rounded-xl border border-pink-200 bg-white text-pink-500 font-semibold text-sm hover:bg-pink-50 transition">⬆️ Terlama</button>
-            </div>
-            <div id="history-container" class="space-y-4">
-              <div class="text-center py-12"><p class="text-gray-400 text-lg">📭 Belum ada pesanan</p><p class="text-gray-300 text-sm mt-2">Mulai pesan sekarang untuk melihat history!</p></div>
-            </div>
-          </div>
+          <div class="mt-6"><div class="flex justify-end mb-4 gap-2"><button id="sort-newest-btn" class="sort-btn active px-4 py-2 rounded-xl border border-pink-200 bg-white text-pink-500 font-semibold text-sm hover:bg-pink-50 transition">⬇️ Terbaru</button><button id="sort-oldest-btn" class="sort-btn px-4 py-2 rounded-xl border border-pink-200 bg-white text-pink-500 font-semibold text-sm hover:bg-pink-50 transition">⬆️ Terlama</button></div><div id="history-container" class="space-y-4"><div class="text-center py-12"><p class="text-gray-400 text-lg">📭 Belum ada pesanan</p></div></div></div>
         </div>
-
-        <footer class="mt-10 text-center">
-          <p class="text-gray-400 text-sm">💕 Terima kasih telah berbelanja di MYCLIPS 💕</p>
-        </footer>
       </div>
     </main>
 
     <!-- Modal Checkout -->
-    <div id="email-modal" class="fixed inset-0 z-50 hidden">
-      <div class="modal-overlay absolute inset-0" onclick="closeModal()"></div>
-      <div class="absolute inset-0 flex items-center justify-center p-4">
-        <div class="card-texture rounded-3xl shadow-2xl w-full max-w-md p-6 relative z-10 border border-pink-100 max-h-[90vh] overflow-y-auto">
-          <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl">✕</button>
-          <div class="text-center mb-5"><span class="text-4xl" id="modal-icon">🎨</span><h3 class="font-bold text-xl text-gray-700 mt-2" id="modal-title"></h3><p class="text-pink-500 font-semibold" id="modal-package"></p></div>
-          <div class="space-y-4">
-            <div id="capcut-quantity-section" class="hidden space-y-3"><div id="capcut-qty-container"></div><p id="capcut-total" class="text-pink-500 font-bold text-sm text-center">Total: <span id="capcut-total-price">Rp 0</span></p><div><label class="block text-gray-600 text-sm font-medium mb-2">Email untuk Pengiriman Akun</label><input type="email" id="capcut-email" class="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors" placeholder="emailkamu@gmail.com" oninput="validateCapCutForm()"><p id="capcut-email-error" class="text-red-500 text-xs mt-2 hidden"></p></div></div>
-            <div id="single-email-section"><label class="block text-gray-600 text-sm font-medium mb-2">Alamat Email</label><div id="single-emails-container" class="space-y-2"><div class="flex gap-2 items-center"><input type="email" class="flex-1 px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors single-email-input" placeholder="contoh@gmail.com" oninput="validateSingleEmails()"><button type="button" onclick="removeSingleEmailInput(this)" class="text-pink-400 hover:text-pink-600 text-lg font-bold hidden">✕</button></div></div><button type="button" onclick="addSingleEmailInput()" class="text-xs text-pink-500 hover:text-pink-600 font-medium mt-2">+ Tambah Email</button><p id="single-email-error" class="text-red-500 text-xs mt-2 hidden"></p><p id="single-email-success" class="text-green-500 text-xs mt-2 hidden"></p><p id="price-total" class="text-pink-500 font-bold text-sm mt-3 text-center hidden">Total: <span id="total-price">Rp 3K</span></p></div>
-            <div id="group-email-section" class="hidden"><label class="block text-gray-600 text-sm font-medium mb-3">Email Akun (Masukkan hingga 15 email)</label><div id="group-emails-container" class="space-y-2 max-h-48 overflow-y-auto pb-2"></div><button type="button" onclick="addGroupEmailInput()" class="text-xs text-pink-500 hover:text-pink-600 font-medium mt-2">+ Tambah Email</button><p id="group-email-error" class="text-red-500 text-xs mt-2 hidden"></p><p id="group-email-success" class="text-green-500 text-xs mt-2 hidden"></p></div>
-            <button id="checkout-btn" onclick="processCheckout()" class="w-full btn-checkout text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none" disabled><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Bayar Sekarang</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div id="email-modal" class="fixed inset-0 z-50 hidden"><div class="modal-overlay absolute inset-0" onclick="closeModal()"></div><div class="absolute inset-0 flex items-center justify-center p-4"><div class="card-texture rounded-3xl shadow-2xl w-full max-w-md p-6 relative z-10 border border-pink-100 max-h-[90vh] overflow-y-auto"><button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl">✕</button><div class="text-center mb-5"><span class="text-4xl" id="modal-icon"></span><h3 class="font-bold text-xl text-gray-700 mt-2" id="modal-title"></h3><p class="text-pink-500 font-semibold" id="modal-package"></p></div><div class="space-y-4"><div id="capcut-quantity-section" class="hidden space-y-3"><div id="capcut-qty-container"></div><p id="capcut-total" class="text-pink-500 font-bold text-sm text-center">Total: <span id="capcut-total-price">Rp 0</span></p><div><label class="block text-gray-600 text-sm font-medium mb-2">Email untuk Pengiriman Akun</label><input type="email" id="capcut-email" class="w-full px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors" placeholder="emailkamu@gmail.com" oninput="validateCapCutForm()"><p id="capcut-email-error" class="text-red-500 text-xs mt-2 hidden"></p></div></div><div id="single-email-section"><label class="block text-gray-600 text-sm font-medium mb-2">Alamat Email</label><div id="single-emails-container" class="space-y-2"><div class="flex gap-2 items-center"><input type="email" class="flex-1 px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors single-email-input" placeholder="contoh@gmail.com" oninput="validateSingleEmails()"><button type="button" onclick="removeSingleEmailInput(this)" class="text-pink-400 hover:text-pink-600 text-lg font-bold hidden">✕</button></div></div><button type="button" onclick="addSingleEmailInput()" class="text-xs text-pink-500 hover:text-pink-600 font-medium mt-2">+ Tambah Email</button><p id="single-email-error" class="text-red-500 text-xs mt-2 hidden"></p><p id="single-email-success" class="text-green-500 text-xs mt-2 hidden"></p><p id="price-total" class="text-pink-500 font-bold text-sm mt-3 text-center hidden">Total: <span id="total-price">Rp 3K</span></p></div><div id="group-email-section" class="hidden"><label class="block text-gray-600 text-sm font-medium mb-3">Email Akun (Masukkan hingga 15 email)</label><div id="group-emails-container" class="space-y-2 max-h-48 overflow-y-auto pb-2"></div><button type="button" onclick="addGroupEmailInput()" class="text-xs text-pink-500 hover:text-pink-600 font-medium mt-2">+ Tambah Email</button><p id="group-email-error" class="text-red-500 text-xs mt-2 hidden"></p><p id="group-email-success" class="text-green-500 text-xs mt-2 hidden"></p></div><button id="checkout-btn" onclick="processCheckout()" class="w-full btn-checkout text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none disabled:shadow-none" disabled><svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Bayar Sekarang</button></div></div></div></div>
 
     <!-- Info Modal -->
-    <div id="info-modal" class="fixed inset-0 z-50 hidden">
-      <div class="modal-overlay absolute inset-0" onclick="closeInfoModal()"></div>
-      <div class="absolute inset-0 flex items-center justify-center p-4">
-        <div class="card-texture rounded-3xl shadow-2xl w-full max-w-md p-6 relative z-10 border border-pink-100">
-          <button onclick="closeInfoModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl">✕</button>
-          <div class="text-center mb-5"><span class="text-4xl" id="info-modal-icon"></span><h3 class="font-bold text-xl text-gray-700 mt-3" id="info-modal-title"></h3></div>
-          <div id="info-modal-content" class="space-y-3 text-gray-600 text-sm"></div>
-        </div>
-      </div>
-    </div>
+    <div id="info-modal" class="fixed inset-0 z-50 hidden"><div class="modal-overlay absolute inset-0" onclick="closeInfoModal()"></div><div class="absolute inset-0 flex items-center justify-center p-4"><div class="card-texture rounded-3xl shadow-2xl w-full max-w-md p-6 relative z-10 border border-pink-100"><button onclick="closeInfoModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl">✕</button><div class="text-center mb-5"><span class="text-4xl" id="info-modal-icon"></span><h3 class="font-bold text-xl text-gray-700 mt-3" id="info-modal-title"></h3></div><div id="info-modal-content" class="space-y-3 text-gray-600 text-sm"></div></div></div></div>
   </div>
 
   <script>
-    // ==================== KONFIGURASI ====================
-    const SERVER_URL = "https://myclips-worker.myhnvdiscord.workers.dev"; // 🔴 GANTI dengan URL Worker kamu setelah deploy
-    // =====================================================
-
+    const SERVER_URL = "https://myclips-worker.myhnvdiscord.workers.dev/";
     const productInfo = {
-      'Canva Premium': {
-        icon: '🎨',
-        features: ['Edit desain unlimited','Template premium','Kolaborasi tim','Brand kit management'],
-        notes: ['✓ Pastikan email benar','✓ Aktif 28-30 hari','✓ Garansi 100%']
-      },
-      'CapCut Premium': {
-        icon: '🎬',
-        features: ['Edit video tanpa watermark','Effect premium','Export 4K','Music library lengkap'],
-        notes: ['✓ Dapat akun privat','✓ Dilarang ganti password','✓ Garansi 100%']
-      },
-      'ChatGPT Pro': {
-        icon: '🤖',
-        features: ['GPT-5 Turbo','Thinking mode','Priority support','Upload file 100MB'],
-        notes: ['✓ Undangan workspace','✓ Privat','✓ Garansi 100%']
-      }
+      'Canva Premium': { icon:'🎨', features:['Edit desain unlimited','Template premium','Kolaborasi tim','Brand kit management'], notes:['✓ Pastikan email benar','✓ Aktif 28-30 hari','✓ Garansi 100%'] },
+      'CapCut Premium': { icon:'🎬', features:['Edit video tanpa watermark','Effect premium','Export 4K','Music library lengkap'], notes:['✓ Dapat akun privat','✓ Dilarang ganti password','✓ Garansi 100%'] },
+      'ChatGPT Pro': { icon:'🤖', features:['GPT-5 Turbo','Thinking mode','Priority support','Upload file 100MB'], notes:['✓ Undangan workspace','✓ Privat','✓ Garansi 100%'] }
     };
-
-    let selectedProduct = null;
-    let selectedPackage = null;
-    let selectedPrice = null;
-    let needsEmail = false;
-    let isCapCut = false;
-    let capCutQuantities = {};
-    let allOrders = [];
-    let currentUserId = 'myclips_user_default';
-    let historySortOrder = 'newest';
-    let countdownInterval = null;
-
-    // ---------- Order history (localStorage) ----------
-    function saveOrderToLocalStorage(orderData) {
-      let orders = JSON.parse(localStorage.getItem('myclips_orders') || '[]');
-      orders.push(orderData);
-      localStorage.setItem('myclips_orders', JSON.stringify(orders));
-    }
-    function loadOrdersFromLocalStorage() {
-      const orders = JSON.parse(localStorage.getItem('myclips_orders') || '[]');
-      allOrders = orders.filter(o => o.user_id === currentUserId);
-      updateHistoryDisplay();
-    }
-    function updateSortButtons() {
-      document.getElementById('sort-newest-btn').classList.toggle('active', historySortOrder === 'newest');
-      document.getElementById('sort-oldest-btn').classList.toggle('active', historySortOrder === 'oldest');
-    }
+    let selectedProduct, selectedPackage, selectedPrice, needsEmail, isCapCut, capCutQuantities = {};
+    let allOrders = [], currentUserId = 'myclips_user_default', historySortOrder = 'newest';
+    function saveOrderToLocalStorage(od) { let orders = JSON.parse(localStorage.getItem('myclips_orders')||'[]'); orders.push(od); localStorage.setItem('myclips_orders', JSON.stringify(orders)); }
+    function loadOrdersFromLocalStorage() { allOrders = JSON.parse(localStorage.getItem('myclips_orders')||'[]').filter(o=>o.user_id===currentUserId); updateHistoryDisplay(); }
+    function updateSortButtons() { document.getElementById('sort-newest-btn').classList.toggle('active',historySortOrder==='newest'); document.getElementById('sort-oldest-btn').classList.toggle('active',historySortOrder==='oldest'); }
     function updateHistoryDisplay() {
-      const container = document.getElementById('history-container');
-      updateSortButtons();
-      if (!allOrders.length) {
-        container.innerHTML = '<div class="text-center py-12"><p class="text-gray-400 text-lg">📭 Belum ada pesanan</p></div>';
-        return;
-      }
-      const sorted = [...allOrders].sort((a,b) => historySortOrder === 'oldest' ? new Date(a.order_date) - new Date(b.order_date) : new Date(b.order_date) - new Date(a.order_date));
-      container.innerHTML = sorted.map(order => {
-        const statusClass = order.status === 'completed' ? 'status-completed' : 'status-pending';
-        const statusText = order.status === 'completed' ? '✓ Selesai' : '⏳ Pending';
-        return `<div class="order-item card-texture rounded-xl p-5 border border-pink-100 shadow-md">
-          <div class="flex justify-between items-start gap-4">
-            <div class="flex-1">
-              <div class="flex items-center gap-3 mb-2"><h3 class="font-bold text-lg">${order.product_name}</h3><span class="status-badge ${statusClass}">${statusText}</span></div>
-              <div class="space-y-1 text-sm text-gray-600">
-                <p><span class="font-semibold">Paket:</span> ${order.package}</p>
-                <p><span class="font-semibold">Email:</span> ${order.email}</p>
-                <p><span class="font-semibold">Qty:</span> ${order.quantity}</p>
-                <p class="text-xs text-gray-400">📅 ${new Date(order.order_date).toLocaleString('id-ID')}</p>
-              </div>
-            </div>
-            <div class="text-right"><p class="text-2xl font-bold text-pink-500">Rp ${parseInt(order.total_price).toLocaleString('id-ID')}</p></div>
-          </div>
-        </div>`;
-      }).join('');
+      let c = document.getElementById('history-container'); updateSortButtons();
+      if(!allOrders.length){ c.innerHTML='<div class="text-center py-12"><p class="text-gray-400 text-lg">📭 Belum ada pesanan</p></div>'; return; }
+      let s = [...allOrders].sort((a,b)=>historySortOrder==='oldest'?new Date(a.order_date)-new Date(b.order_date):new Date(b.order_date)-new Date(a.order_date));
+      c.innerHTML = s.map(o=>`<div class="order-item card-texture rounded-xl p-5 border border-pink-100 shadow-md"><div class="flex justify-between items-start gap-4"><div class="flex-1"><div class="flex items-center gap-3 mb-2"><h3 class="font-bold text-lg">${o.product_name}</h3><span class="status-badge ${o.status==='completed'?'status-completed':'status-pending'}">${o.status==='completed'?'✓ Selesai':'⏳ Pending'}</span></div><div class="space-y-1 text-sm text-gray-600"><p><span class="font-semibold">Paket:</span> ${o.package}</p><p><span class="font-semibold">Email:</span> ${o.email}</p><p><span class="font-semibold">Qty:</span> ${o.quantity}</p><p class="text-xs text-gray-400">📅 ${new Date(o.order_date).toLocaleString('id-ID')}</p></div></div><div class="text-right"><p class="text-2xl font-bold text-pink-500">Rp ${parseInt(o.total_price).toLocaleString('id-ID')}</p></div></div></div>`).join('');
     }
-
-    // ---------- Tab switching ----------
-    document.querySelectorAll('.tab-button').forEach(btn => {
-      btn.addEventListener('click', function() {
-        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
-        this.classList.add('active');
-        document.getElementById(this.dataset.tab + '-tab').classList.remove('hidden');
+    document.querySelectorAll('.tab-button').forEach(btn=>btn.addEventListener('click',function(){ document.querySelectorAll('.tab-button').forEach(b=>b.classList.remove('active')); document.querySelectorAll('.tab-content').forEach(c=>c.classList.add('hidden')); this.classList.add('active'); document.getElementById(this.dataset.tab+'-tab').classList.remove('hidden'); }));
+    document.querySelectorAll('.package-option').forEach(opt=>opt.addEventListener('click',function(){ selectedProduct=this.dataset.product; selectedPackage=this.dataset.package; selectedPrice=this.dataset.price; needsEmail=this.dataset.needsEmail==='true'; isCapCut=this.dataset.isCapcut==='true'; document.querySelectorAll('.package-option').forEach(p=>p.classList.remove('selected')); this.classList.add('selected'); openModal(); }));
+    document.querySelectorAll('.info-tooltip button').forEach(b=>b.addEventListener('click',function(e){ e.stopPropagation(); openInfoModal(this.closest('.product-card').querySelector('h2').textContent.trim()); }));
+    function openModal(){
+      let m=document.getElementById('email-modal'), icon=document.getElementById('modal-icon'), t=document.getElementById('modal-title'), p=document.getElementById('modal-package');
+      icon.textContent=selectedProduct.includes('Canva')?'🎨':selectedProduct.includes('CapCut')?'🎬':'🤖';
+      t.textContent=selectedProduct; p.textContent=`${selectedPackage} - Rp ${(parseInt(selectedPrice)/1000)}K`;
+      document.getElementById('single-email-section').classList.toggle('hidden',isCapCut||selectedPackage.includes('Paket Grup'));
+      document.getElementById('group-email-section').classList.toggle('hidden',!(!isCapCut&&selectedPackage.includes('Paket Grup')));
+      document.getElementById('capcut-quantity-section').classList.toggle('hidden',!isCapCut);
+      if(isCapCut){ initializeCapCutQuantity(); } else if(selectedPackage.includes('Paket Grup')){ initializeGroupEmails(); } else { initializeSingleEmails(); }
+      document.getElementById('checkout-btn').disabled=true; m.classList.remove('hidden');
+    }
+    function closeModal(){ document.getElementById('email-modal').classList.add('hidden'); }
+    function openInfoModal(n){
+      let i=productInfo[n]; if(!i)return;
+      document.getElementById('info-modal-icon').textContent=i.icon; document.getElementById('info-modal-title').textContent=n;
+      document.getElementById('info-modal-content').innerHTML = `<div class="bg-pink-50 rounded-xl p-4 space-y-2"><h4 class="font-bold text-gray-700">✨ Fitur:</h4><ul class="space-y-1 ml-2 text-sm">${i.features.map(f=>`<li>✓ ${f}</li>`).join('')}</ul></div>` + (i.notes?`<div class="bg-blue-50 rounded-xl p-4 space-y-2 border-l-4 border-blue-400"><h4 class="font-bold text-gray-700">📝 Penting:</h4><ul class="space-y-1 ml-2 text-xs text-gray-700">${i.notes.map(n=>`<li>${n}</li>`).join('')}</ul></div>`:'');
+      document.getElementById('info-modal').classList.remove('hidden');
+    }
+    function closeInfoModal(){ document.getElementById('info-modal').classList.add('hidden'); }
+    // CapCut
+    function initializeCapCutQuantity(){
+      let c=document.getElementById('capcut-qty-container'); c.innerHTML=''; capCutQuantities={'7 Hari':0,'14 Hari':0,'1 Bulan':0};
+      [{name:'7 Hari',price:6000},{name:'14 Hari',price:11000},{name:'1 Bulan',price:20000}].forEach(p=>{
+        let d=document.createElement('div'); d.className='flex justify-between items-center gap-2 p-3 rounded-xl border-2 border-pink-200 bg-pink-50';
+        d.innerHTML=`<div class="flex-1"><p class="font-semibold text-gray-700 text-sm">${p.name}</p><p class="text-pink-500 font-bold text-xs">Rp ${p.price.toLocaleString('id-ID')}</p></div><div class="flex items-center gap-1 bg-white rounded-lg px-2 py-1 border border-pink-200"><button type="button" onclick="window.incQty('${p.name}')" class="text-pink-500 font-bold text-sm w-5">+</button><input type="number" class="capcut-qty-input w-8 text-center border-0 bg-transparent font-bold text-gray-700 text-sm" data-package="${p.name}" value="0" readonly><button type="button" onclick="window.decQty('${p.name}')" class="text-pink-500 font-bold text-sm w-5">−</button></div>`;
+        c.appendChild(d);
       });
-    });
-
-    // ---------- Package selection ----------
-    document.querySelectorAll('.package-option').forEach(option => {
-      option.addEventListener('click', function() {
-        selectedProduct = this.dataset.product;
-        selectedPackage = this.dataset.package;
-        selectedPrice = this.dataset.price;
-        needsEmail = this.dataset.needsEmail === 'true';
-        isCapCut = this.dataset.isCapcut === 'true';
-        document.querySelectorAll('.package-option').forEach(p => p.classList.remove('selected'));
-        this.classList.add('selected');
-        openModal();
-      });
-    });
-
-    // ---------- Info tooltip ----------
-    document.querySelectorAll('.info-tooltip button').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        const productName = this.closest('.product-card').querySelector('h2').textContent.trim();
-        openInfoModal(productName);
-      });
-    });
-
-    // ---------- Modals ----------
-    function openModal() {
-      const modal = document.getElementById('email-modal');
-      const icon = document.getElementById('modal-icon');
-      const title = document.getElementById('modal-title');
-      const pkg = document.getElementById('modal-package');
-      const singleSec = document.getElementById('single-email-section');
-      const groupSec = document.getElementById('group-email-section');
-      const capcutSec = document.getElementById('capcut-quantity-section');
-      
-      icon.textContent = selectedProduct.includes('Canva') ? '🎨' : selectedProduct.includes('CapCut') ? '🎬' : '🤖';
-      title.textContent = selectedProduct;
-      pkg.textContent = `${selectedPackage} - Rp ${(parseInt(selectedPrice)/1000)}K`;
-      
-      if (isCapCut) {
-        singleSec.classList.add('hidden');
-        groupSec.classList.add('hidden');
-        capcutSec.classList.remove('hidden');
-        initializeCapCutQuantity();
-        document.getElementById('checkout-btn').disabled = true;
-      } else {
-        capcutSec.classList.add('hidden');
-        if (selectedPackage.includes('Paket Grup')) {
-          singleSec.classList.add('hidden');
-          groupSec.classList.remove('hidden');
-          initializeGroupEmails();
-        } else {
-          singleSec.classList.remove('hidden');
-          groupSec.classList.add('hidden');
-          initializeSingleEmails();
-        }
-        document.getElementById('checkout-btn').disabled = true;
-      }
-      modal.classList.remove('hidden');
+      document.getElementById('capcut-email').value=''; document.getElementById('capcut-email-error').classList.add('hidden');
     }
-
-    function closeModal() {
-      document.getElementById('email-modal').classList.add('hidden');
-      document.querySelectorAll('.package-option').forEach(p => p.classList.remove('selected'));
-    }
-
-    function openInfoModal(productName) {
-      const modal = document.getElementById('info-modal');
-      const info = productInfo[productName];
-      if (!info) return;
-      document.getElementById('info-modal-icon').textContent = info.icon;
-      document.getElementById('info-modal-title').textContent = productName;
-      let html = `<div class="bg-pink-50 rounded-xl p-4 space-y-2"><h4 class="font-bold text-gray-700">✨ Fitur Utama:</h4><ul class="space-y-1 ml-2 text-sm">${info.features.map(f=>`<li>✓ ${f}</li>`).join('')}</ul></div>`;
-      if (info.notes) html += `<div class="bg-blue-50 rounded-xl p-4 space-y-2 border-l-4 border-blue-400"><h4 class="font-bold text-gray-700">📝 Penting:</h4><ul class="space-y-1 ml-2 text-xs text-gray-700">${info.notes.map(n=>`<li>${n}</li>`).join('')}</ul></div>`;
-      document.getElementById('info-modal-content').innerHTML = html;
-      modal.classList.remove('hidden');
-    }
-    function closeInfoModal() { document.getElementById('info-modal').classList.add('hidden'); }
-
-    // ---------- CapCut ----------
-    function initializeCapCutQuantity() {
-      const container = document.getElementById('capcut-qty-container');
-      container.innerHTML = '';
-      capCutQuantities = { '7 Hari': 0, '14 Hari': 0, '1 Bulan': 0 };
-      const pkgList = [{ name: '7 Hari', price: 6000 }, { name: '14 Hari', price: 11000 }, { name: '1 Bulan', price: 20000 }];
-      pkgList.forEach(pkg => {
-        const div = document.createElement('div');
-        div.className = 'flex justify-between items-center gap-2 p-3 rounded-xl border-2 border-pink-200 bg-pink-50';
-        div.innerHTML = `<div class="flex-1"><p class="font-semibold text-gray-700 text-sm">${pkg.name}</p><p class="text-pink-500 font-bold text-xs">Rp ${pkg.price.toLocaleString('id-ID')}</p></div>
-        <div class="flex items-center gap-1 bg-white rounded-lg px-2 py-1 border border-pink-200">
-          <button type="button" onclick="decreaseCapCutQty('${pkg.name}')" class="text-pink-500 font-bold text-sm w-5">−</button>
-          <input type="number" class="capcut-qty-input w-8 text-center border-0 bg-transparent font-bold text-gray-700 text-sm" data-package="${pkg.name}" value="0" readonly>
-          <button type="button" onclick="increaseCapCutQty('${pkg.name}')" class="text-pink-500 font-bold text-sm w-5">+</button>
-        </div>`;
-        container.appendChild(div);
-      });
-      document.getElementById('capcut-email').value = '';
-      document.getElementById('capcut-email-error').classList.add('hidden');
-    }
-    window.increaseCapCutQty = function(pkg) {
-      if (capCutQuantities[pkg] < 99) { capCutQuantities[pkg]++; updateCapCutDisplay(pkg); }
-    };
-    window.decreaseCapCutQty = function(pkg) {
-      if (capCutQuantities[pkg] > 0) { capCutQuantities[pkg]--; updateCapCutDisplay(pkg); }
-    };
-    function updateCapCutDisplay(pkg) {
-      document.querySelector(`.capcut-qty-input[data-package="${pkg}"]`).value = capCutQuantities[pkg];
-      updateCapCutTotal();
-      validateCapCutForm();
-    }
-    function updateCapCutTotal() {
-      const priceMap = { '7 Hari': 6000, '14 Hari': 11000, '1 Bulan': 20000 };
-      let total = 0;
-      Object.entries(capCutQuantities).forEach(([pkg, qty]) => total += (priceMap[pkg]||0) * qty);
-      document.getElementById('capcut-total-price').textContent = `Rp ${total.toLocaleString('id-ID')}`;
-    }
-    function validateCapCutForm() {
-      const email = document.getElementById('capcut-email').value.trim();
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const totalQty = Object.values(capCutQuantities).reduce((a,b)=>a+b,0);
-      const errorEl = document.getElementById('capcut-email-error');
-      if (totalQty === 0 || !email || !emailRegex.test(email)) {
-        document.getElementById('checkout-btn').disabled = true;
-        if (email && !emailRegex.test(email)) { errorEl.textContent = 'Format email tidak valid'; errorEl.classList.remove('hidden'); }
-        else errorEl.classList.add('hidden');
-      } else {
-        errorEl.classList.add('hidden');
-        document.getElementById('checkout-btn').disabled = false;
-      }
-    }
+    window.incQty = function(p){ if(capCutQuantities[p]<99){ capCutQuantities[p]++; updateCapCutDisplay(p); } };
+    window.decQty = function(p){ if(capCutQuantities[p]>0){ capCutQuantities[p]--; updateCapCutDisplay(p); } };
+    function updateCapCutDisplay(p){ document.querySelector(`.capcut-qty-input[data-package="${p}"]`).value=capCutQuantities[p]; updateCapCutTotal(); validateCapCutForm(); }
+    function updateCapCutTotal(){ let t=0; let m={'7 Hari':6000,'14 Hari':11000,'1 Bulan':20000}; Object.entries(capCutQuantities).forEach(([p,q])=>t+=m[p]*q); document.getElementById('capcut-total-price').textContent=`Rp ${t.toLocaleString('id-ID')}`; }
+    function validateCapCutForm(){ let email=document.getElementById('capcut-email').value.trim(); let re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/; let qty=Object.values(capCutQuantities).reduce((a,b)=>a+b,0); document.getElementById('checkout-btn').disabled = qty===0 || !email || !re.test(email); }
     document.getElementById('capcut-email')?.addEventListener('input', validateCapCutForm);
-
-    // ---------- Single email ----------
-    function initializeSingleEmails() {
-      const container = document.getElementById('single-emails-container');
-      container.innerHTML = '<div class="flex gap-2 items-center"><input type="email" class="flex-1 px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors single-email-input" placeholder="contoh@gmail.com" oninput="validateSingleEmails()"><button type="button" onclick="removeSingleEmailInput(this)" class="text-pink-400 hover:text-pink-600 text-lg font-bold hidden">✕</button></div>';
-      document.getElementById('price-total').classList.add('hidden');
-      document.getElementById('single-email-error').classList.add('hidden');
-      document.getElementById('single-email-success').classList.add('hidden');
-    }
-    window.addSingleEmailInput = function() {
-      const container = document.getElementById('single-emails-container');
-      container.querySelectorAll('button').forEach(b => b.classList.remove('hidden'));
-      const div = document.createElement('div');
-      div.className = 'flex gap-2 items-center';
-      div.innerHTML = '<input type="email" class="flex-1 px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors single-email-input" placeholder="contoh@gmail.com" oninput="validateSingleEmails()"><button type="button" onclick="removeSingleEmailInput(this)" class="text-pink-400 hover:text-pink-600 text-lg font-bold">✕</button>';
-      container.appendChild(div);
-      validateSingleEmails();
-    };
-    window.removeSingleEmailInput = function(btn) {
-      const container = document.getElementById('single-emails-container');
-      if (container.children.length > 1) {
-        btn.parentElement.remove();
-        if (container.children.length === 1) container.querySelector('button').classList.add('hidden');
-        validateSingleEmails();
-      }
-    };
-    function validateSingleEmails() {
-      const inputs = document.querySelectorAll('.single-email-input');
-      const emails = Array.from(inputs).map(i => i.value.trim()).filter(e => e);
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const allValid = emails.length > 0 && emails.every(e => emailRegex.test(e));
-      document.getElementById('single-email-error').classList.add('hidden');
-      document.getElementById('single-email-success').classList.add('hidden');
-      document.getElementById('price-total').classList.add('hidden');
-      if (allValid) {
-        document.getElementById('single-email-success').textContent = `✅ ${emails.length} email valid!`;
-        document.getElementById('single-email-success').classList.remove('hidden');
-        const total = parseInt(selectedPrice) * emails.length;
-        document.getElementById('total-price').textContent = `Rp ${total.toLocaleString('id-ID')}`;
-        document.getElementById('price-total').classList.remove('hidden');
-        document.getElementById('checkout-btn').disabled = false;
+    // Single email
+    function initializeSingleEmails(){ document.getElementById('single-emails-container').innerHTML='<div class="flex gap-2 items-center"><input type="email" class="flex-1 px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors single-email-input" placeholder="contoh@gmail.com" oninput="validateSingleEmails()"><button type="button" onclick="removeSingleEmailInput(this)" class="text-pink-400 hover:text-pink-600 text-lg font-bold hidden">✕</button></div>'; document.getElementById('price-total').classList.add('hidden'); }
+    window.addSingleEmailInput = function(){ let c=document.getElementById('single-emails-container'); c.querySelectorAll('button').forEach(b=>b.classList.remove('hidden')); let d=document.createElement('div'); d.className='flex gap-2 items-center'; d.innerHTML='<input type="email" class="flex-1 px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors single-email-input" placeholder="contoh@gmail.com" oninput="validateSingleEmails()"><button type="button" onclick="removeSingleEmailInput(this)" class="text-pink-400 hover:text-pink-600 text-lg font-bold">✕</button>'; c.appendChild(d); validateSingleEmails(); };
+    window.removeSingleEmailInput = function(b){ let c=document.getElementById('single-emails-container'); if(c.children.length>1){ b.parentElement.remove(); if(c.children.length===1) c.querySelector('button').classList.add('hidden'); validateSingleEmails(); } };
+    function validateSingleEmails(){ let inputs=document.querySelectorAll('.single-email-input'); let emails=Array.from(inputs).map(i=>i.value.trim()).filter(e=>e); let re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/; let allValid=emails.length>0 && emails.every(e=>re.test(e)); document.getElementById('single-email-error').classList.add('hidden'); document.getElementById('single-email-success').classList.add('hidden'); document.getElementById('price-total').classList.add('hidden'); if(allValid){ document.getElementById('single-email-success').textContent=`✅ ${emails.length} email valid!`; document.getElementById('single-email-success').classList.remove('hidden'); let tot=parseInt(selectedPrice)*emails.length; document.getElementById('total-price').textContent=`Rp ${tot.toLocaleString('id-ID')}`; document.getElementById('price-total').classList.remove('hidden'); document.getElementById('checkout-btn').disabled=false; } else { if(emails.length>0) document.getElementById('single-email-error').classList.remove('hidden'); document.getElementById('checkout-btn').disabled=true; } }
+    // Group email
+    function initializeGroupEmails(){ let c=document.getElementById('group-emails-container'); c.innerHTML=''; for(let i=0;i<15;i++){ let d=document.createElement('div'); d.className='flex gap-2 items-center'; d.innerHTML=`<input type="email" placeholder="Email ${i+1}" class="flex-1 px-3 py-2 rounded-lg border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors text-sm group-email-input" oninput="validateGroupEmails()"><button type="button" onclick="this.parentElement.remove();validateGroupEmails()" class="text-pink-400 hover:text-pink-600 text-lg">✕</button>`; c.appendChild(d); } validateGroupEmails(); }
+    window.addGroupEmailInput = function(){ let c=document.getElementById('group-emails-container'); if(c.children.length>=15)return; let d=document.createElement('div'); d.className='flex gap-2 items-center'; d.innerHTML=`<input type="email" placeholder="Email ${c.children.length+1}" class="flex-1 px-3 py-2 rounded-lg border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors text-sm group-email-input" oninput="validateGroupEmails()"><button type="button" onclick="this.parentElement.remove();validateGroupEmails()" class="text-pink-400 hover:text-pink-600 text-lg">✕</button>`; c.appendChild(d); validateGroupEmails(); };
+    function validateGroupEmails(){ let inputs=document.querySelectorAll('.group-email-input'); let emails=Array.from(inputs).map(i=>i.value.trim()).filter(e=>e); let re=/^[^\s@]+@[^\s@]+\.[^\s@]+$/; let allValid=emails.length>0 && emails.every(e=>re.test(e)); document.getElementById('group-email-error').classList.add('hidden'); document.getElementById('group-email-success').classList.add('hidden'); if(allValid){ document.getElementById('group-email-success').textContent=`✅ ${emails.length} email valid!`; document.getElementById('group-email-success').classList.remove('hidden'); document.getElementById('checkout-btn').disabled=false; } else { if(emails.length>0) document.getElementById('group-email-error').classList.remove('hidden'); document.getElementById('checkout-btn').disabled=true; } }
+    // Checkout
+    async function processCheckout(){
+      let emails=[], totalPrice=0, quantity=0;
+      if(isCapCut){
+        let email=document.getElementById('capcut-email').value.trim(); if(!email)return; emails=[email];
+        let m={'7 Hari':6000,'14 Hari':11000,'1 Bulan':20000};
+        Object.entries(capCutQuantities).forEach(([p,q])=>{ if(q>0){ totalPrice+=m[p]*q; quantity+=q; } });
+        if(totalPrice===0)return;
+      } else if(selectedPackage.includes('Paket Grup')){
+        let inputs=document.querySelectorAll('.group-email-input'); emails=Array.from(inputs).map(i=>i.value.trim()).filter(e=>e); if(!emails.length)return;
+        totalPrice=parseInt(selectedPrice); quantity=emails.length;
       } else {
-        if (emails.length > 0) document.getElementById('single-email-error').classList.remove('hidden');
-        document.getElementById('checkout-btn').disabled = true;
+        let inputs=document.querySelectorAll('.single-email-input'); emails=Array.from(inputs).map(i=>i.value.trim()).filter(e=>e); if(!emails.length)return;
+        totalPrice=parseInt(selectedPrice)*emails.length; quantity=emails.length;
       }
-    }
-
-    // ---------- Group email ----------
-    function initializeGroupEmails() {
-      const container = document.getElementById('group-emails-container');
-      container.innerHTML = '';
-      for (let i=0; i<15; i++) {
-        const div = document.createElement('div');
-        div.className = 'flex gap-2 items-center';
-        div.innerHTML = `<input type="email" placeholder="Email ${i+1}" class="flex-1 px-3 py-2 rounded-lg border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors text-sm group-email-input" oninput="validateGroupEmails()"><button type="button" onclick="this.parentElement.remove();validateGroupEmails()" class="text-pink-400 hover:text-pink-600 text-lg">✕</button>`;
-        container.appendChild(div);
-      }
-      validateGroupEmails();
-    }
-    window.addGroupEmailInput = function() {
-      const container = document.getElementById('group-emails-container');
-      if (container.children.length >= 15) return;
-      const div = document.createElement('div');
-      div.className = 'flex gap-2 items-center';
-      div.innerHTML = `<input type="email" placeholder="Email ${container.children.length+1}" class="flex-1 px-3 py-2 rounded-lg border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors text-sm group-email-input" oninput="validateGroupEmails()"><button type="button" onclick="this.parentElement.remove();validateGroupEmails()" class="text-pink-400 hover:text-pink-600 text-lg">✕</button>`;
-      container.appendChild(div);
-      validateGroupEmails();
-    };
-    function validateGroupEmails() {
-      const inputs = document.querySelectorAll('.group-email-input');
-      const emails = Array.from(inputs).map(i => i.value.trim()).filter(e => e);
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      const allValid = emails.length > 0 && emails.every(e => emailRegex.test(e));
-      document.getElementById('group-email-error').classList.add('hidden');
-      document.getElementById('group-email-success').classList.add('hidden');
-      if (allValid) {
-        document.getElementById('group-email-success').textContent = `✅ ${emails.length} email valid!`;
-        document.getElementById('group-email-success').classList.remove('hidden');
-        document.getElementById('checkout-btn').disabled = false;
-      } else {
-        if (emails.length > 0) document.getElementById('group-email-error').classList.remove('hidden');
-        document.getElementById('checkout-btn').disabled = true;
-      }
-    }
-
-    // ---------- Checkout & Midtrans ----------
-    async function processCheckout() {
-      let emails = [];
-      let totalPrice = 0;
-      let quantity = 0;
-
-      if (isCapCut) {
-        const email = document.getElementById('capcut-email').value.trim();
-        if (!email) return;
-        emails = [email];
-        const priceMap = { '7 Hari': 6000, '14 Hari': 11000, '1 Bulan': 20000 };
-        Object.entries(capCutQuantities).forEach(([pkg, qty]) => {
-          if (qty > 0) {
-            totalPrice += priceMap[pkg] * qty;
-            quantity += qty;
-          }
-        });
-        if (totalPrice === 0) return;
-      } else if (selectedPackage.includes('Paket Grup')) {
-        const inputs = document.querySelectorAll('.group-email-input');
-        emails = Array.from(inputs).map(i => i.value.trim()).filter(e => e);
-        if (!emails.length) return;
-        totalPrice = parseInt(selectedPrice);
-        quantity = emails.length;
-      } else {
-        const inputs = document.querySelectorAll('.single-email-input');
-        emails = Array.from(inputs).map(i => i.value.trim()).filter(e => e);
-        if (!emails.length) return;
-        totalPrice = parseInt(selectedPrice) * emails.length;
-        quantity = emails.length;
-      }
-
       try {
-        const response = await fetch(`${SERVER_URL}/api/buat-transaksi`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            product: selectedProduct,
-            package: selectedPackage,
-            email: emails.join(', '),
-            price: totalPrice,
-            quantity: quantity
-          })
-        });
-        const data = await response.json();
-        if (!data.token) throw new Error('Token tidak didapat');
-
-        window.snap.pay(data.token, {
-          onSuccess: function() {
-            showToast('Pembayaran berhasil! Undangan akan dikirim otomatis.', 'success');
-            closeModal();
-            setTimeout(() => location.reload(), 3000);
-          },
-          onPending: function() { showToast('Menunggu pembayaran...', 'info'); },
-          onError: function() { showToast('Pembayaran gagal.', 'error'); },
-          onClose: function() { showToast('Popup ditutup.', 'info'); }
-        });
-      } catch (error) {
-        showToast('Gagal terhubung ke server. Coba lagi.', 'error');
-        console.error(error);
-      }
+        let res=await fetch(`${SERVER_URL}/api/buat-transaksi`,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product:selectedProduct,package:selectedPackage,email:emails.join(', '),price:totalPrice,quantity})});
+        let data=await res.json(); if(!data.token)throw new Error('No token');
+        window.snap.pay(data.token,{onSuccess:()=>{showToast('Pembayaran berhasil! Undangan otomatis diproses.','success');closeModal();setTimeout(()=>location.reload(),3000);},onPending:()=>showToast('Menunggu pembayaran...','info'),onError:()=>showToast('Pembayaran gagal.','error'),onClose:()=>showToast('Popup ditutup.','info')});
+      } catch(e){ showToast('Gagal terhubung ke server.','error'); console.error(e); }
     }
-
-    function showToast(message, type='info') {
-      const container = document.getElementById('toast-container');
-      const toast = document.createElement('div');
-      toast.className = `toast px-4 py-3 rounded-xl shadow-lg ${type === 'success' ? 'bg-green-500' : 'bg-pink-500'} text-white font-medium text-sm`;
-      toast.textContent = message;
-      container.appendChild(toast);
-      setTimeout(() => { toast.style.animation = 'slideIn 0.3s ease reverse'; setTimeout(() => toast.remove(), 300); }, 3000);
-    }
-
-    // ---------- Initialization ----------
-    function initializeApp() {
-      loadOrdersFromLocalStorage();
-      document.getElementById('sort-newest-btn').addEventListener('click', ()=>{ historySortOrder='newest'; updateHistoryDisplay(); });
-      document.getElementById('sort-oldest-btn').addEventListener('click', ()=>{ historySortOrder='oldest'; updateHistoryDisplay(); });
-    }
-
-    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeApp);
-    else initializeApp();
+    function showToast(msg,type='info'){ let c=document.getElementById('toast-container'); let t=document.createElement('div'); t.className=`toast px-4 py-3 rounded-xl shadow-lg ${type==='success'?'bg-green-500':'bg-pink-500'} text-white font-medium text-sm`; t.textContent=msg; c.appendChild(t); setTimeout(()=>{ t.style.animation='slideIn 0.3s ease reverse'; setTimeout(()=>t.remove(),300); },3000); }
+    // Init
+    function initApp(){ loadOrdersFromLocalStorage(); document.getElementById('sort-newest-btn').addEventListener('click',()=>{ historySortOrder='newest'; updateHistoryDisplay(); }); document.getElementById('sort-oldest-btn').addEventListener('click',()=>{ historySortOrder='oldest'; updateHistoryDisplay(); }); }
+    if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',initApp); else initApp();
   </script>
 </body>
 </html>
