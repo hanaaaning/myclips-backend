@@ -10,43 +10,187 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     * { font-family: 'Poppins', sans-serif; }
+    
     .texture-bg {
       background-color: #FFF0F5;
-      background-image: radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.4) 0%, transparent 40%),
-                        radial-gradient(circle at 40% 80%, rgba(255, 174, 185, 0.25) 0%, transparent 45%),
-                        url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+      background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255, 182, 193, 0.3) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 192, 203, 0.4) 0%, transparent 40%),
+        radial-gradient(circle at 40% 80%, rgba(255, 174, 185, 0.25) 0%, transparent 45%),
+        url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
     }
-    .card-texture { background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,245,250,0.9) 100%); backdrop-filter: blur(10px); }
-    .price-tag { background: linear-gradient(135deg, #FF6B9D 0%, #FF8FAB 100%); }
-    .btn-checkout { background: linear-gradient(135deg, #25D366 0%, #128C7E 100%); transition: all 0.3s ease; }
-    .btn-checkout:hover { transform: translateY(-2px); box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4); }
-    .product-card { transition: all 0.3s ease; }
-    .product-card:hover { transform: translateY(-5px); }
-    .package-option { transition: all 0.2s ease; cursor: pointer; }
-    .package-option:hover { border-color: #FF6B9D; background: rgba(255, 107, 157, 0.05); }
-    .package-option.selected { border-color: #FF6B9D; background: linear-gradient(135deg, rgba(255, 107, 157, 0.1) 0%, rgba(255, 143, 171, 0.1) 100%); }
-    .modal-overlay { background: rgba(0, 0, 0, 0.5); backdrop-filter: blur(5px); }
-    .strikethrough { text-decoration: line-through; opacity: 0.6; }
-    .discount-badge { background: linear-gradient(135deg, #FF4757 0%, #FF6B81 100%); }
-    .floating-hearts { position: absolute; width: 100%; height: 100%; overflow: hidden; pointer-events: none; }
-    .heart { position: absolute; font-size: 20px; opacity: 0.1; animation: float 15s infinite ease-in-out; }
-    @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-20px) rotate(10deg); } }
-    .toast { animation: slideIn 0.3s ease; }
-    @keyframes slideIn { from { transform: translateX(100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
-    .tab-button { transition: all 0.3s ease; }
-    .tab-button.active { background: linear-gradient(135deg, #FF6B9D 0%, #FF8FAB 100%); color: white; }
-    .tab-button:not(.active) { background: transparent; color: #999; }
-    .order-item { animation: fadeIn 0.3s ease; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    .status-badge { display: inline-block; padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.75rem; font-weight: 600; }
-    .status-pending { background: rgba(255, 193, 7, 0.2); color: #F57C00; }
-    .status-completed { background: rgba(76, 175, 80, 0.2); color: #2E7D32; }
-    .info-tooltip { position: relative; display: inline-flex; align-items: center; justify-content: center; }
-    .info-tooltip:hover .tooltip-text { opacity: 1; visibility: visible; }
-    .tooltip-text { position: absolute; bottom: auto; top: -80px; left: 50%; transform: translateX(-50%); background: rgba(0, 0, 0, 0.9); color: white; padding: 0.5rem 0.75rem; border-radius: 0.5rem; font-size: 0.75rem; white-space: nowrap; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 50; }
-    .tooltip-text::after { content: ''; position: absolute; bottom: -4px; left: 50%; transform: translateX(-50%); border: 4px solid transparent; border-top-color: rgba(0, 0, 0, 0.9); }
-    .sort-btn.active { background: linear-gradient(135deg, #FF6B9D 0%, #FF8FAB 100%); color: white; border-color: #FF6B9D; }
+    
+    .card-texture {
+      background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,245,250,0.9) 100%);
+      backdrop-filter: blur(10px);
+    }
+    
+    .price-tag {
+      background: linear-gradient(135deg, #FF6B9D 0%, #FF8FAB 100%);
+    }
+    
+    .btn-checkout {
+      background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+      transition: all 0.3s ease;
+    }
+    
+    .btn-checkout:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+    }
+    
+    .product-card {
+      transition: all 0.3s ease;
+    }
+    
+    .product-card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .package-option {
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .package-option:hover {
+      border-color: #FF6B9D;
+      background: rgba(255, 107, 157, 0.05);
+    }
+    
+    .package-option.selected {
+      border-color: #FF6B9D;
+      background: linear-gradient(135deg, rgba(255, 107, 157, 0.1) 0%, rgba(255, 143, 171, 0.1) 100%);
+    }
+    
+    .modal-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+    }
+    
+    .strikethrough {
+      text-decoration: line-through;
+      opacity: 0.6;
+    }
+    
+    .discount-badge {
+      background: linear-gradient(135deg, #FF4757 0%, #FF6B81 100%);
+    }
+    
+    .floating-hearts {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    
+    .heart {
+      position: absolute;
+      font-size: 20px;
+      opacity: 0.1;
+      animation: float 15s infinite ease-in-out;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(10deg); }
+    }
+    
+    .toast {
+      animation: slideIn 0.3s ease;
+    }
+    
+    @keyframes slideIn {
+      from { transform: translateX(100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+
+    .tab-button {
+      transition: all 0.3s ease;
+    }
+
+    .tab-button.active {
+      background: linear-gradient(135deg, #FF6B9D 0%, #FF8FAB 100%);
+      color: white;
+    }
+
+    .tab-button:not(.active) {
+      background: transparent;
+      color: #999;
+    }
+
+    .order-item {
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .status-badge {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+    }
+
+    .status-pending {
+      background: rgba(255, 193, 7, 0.2);
+      color: #F57C00;
+    }
+
+    .status-completed {
+      background: rgba(76, 175, 80, 0.2);
+      color: #2E7D32;
+    }
+
+    .info-tooltip {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .info-tooltip:hover .tooltip-text {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .tooltip-text {
+      position: absolute;
+      bottom: auto;
+      top: -80px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(0, 0, 0, 0.9);
+      color: white;
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.5rem;
+      font-size: 0.75rem;
+      white-space: nowrap;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      z-index: 50;
+    }
+
+    .tooltip-text::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 4px solid transparent;
+      border-top-color: rgba(0, 0, 0, 0.9);
+    }
+
+    .sort-btn.active {
+      background: linear-gradient(135deg, #FF6B9D 0%, #FF8FAB 100%);
+      color: white;
+      border-color: #FF6B9D;
+    }
   </style>
 </head>
 <body class="h-full">
@@ -87,7 +231,7 @@
               <div class="relative">
                 <div class="absolute top-3 right-3 z-20">
                   <div class="info-tooltip">
-                    <button class="text-pink-500 hover:bg-pink-100 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold border-2 border-pink-300 bg-white"> i </button>
+                    <button class="text-pink-500 hover:bg-pink-100 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold border-2 border-pink-300 bg-white">i</button>
                     <span class="tooltip-text">Edit desain unlimited, template premium, kolaborasi tim</span>
                   </div>
                 </div>
@@ -113,7 +257,7 @@
             <!-- CapCut Premium -->
             <div class="product-card card-texture rounded-3xl shadow-xl shadow-pink-200/50 overflow-hidden border border-pink-100">
               <div class="relative">
-                <div class="absolute top-3 right-3 z-20"><div class="info-tooltip"><button class="text-pink-500 hover:bg-pink-100 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold border-2 border-pink-300 bg-white"> i </button><span class="tooltip-text">Edit video tanpa watermark, effect premium, export 4K</span></div></div>
+                <div class="absolute top-3 right-3 z-20"><div class="info-tooltip"><button class="text-pink-500 hover:bg-pink-100 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold border-2 border-pink-300 bg-white">i</button><span class="tooltip-text">Edit video tanpa watermark, effect premium, export 4K</span></div></div>
                 <div class="price-tag text-white text-center py-3 flex items-center justify-center gap-2 pr-8"><span class="text-2xl">🎬</span><h2 class="font-bold text-lg">CapCut Premium</h2></div>
               </div>
               <div class="p-5 space-y-3">
@@ -125,7 +269,7 @@
             <!-- ChatGPT Pro -->
             <div class="product-card card-texture rounded-3xl shadow-xl shadow-pink-200/50 overflow-hidden border border-pink-100">
               <div class="relative">
-                <div class="absolute top-3 right-3 z-20"><div class="info-tooltip"><button class="text-pink-500 hover:bg-pink-100 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold border-2 border-pink-300 bg-white"> i </button><span class="tooltip-text">GPT-5 Turbo, Thinking mode, priority support</span></div></div>
+                <div class="absolute top-3 right-3 z-20"><div class="info-tooltip"><button class="text-pink-500 hover:bg-pink-100 rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold border-2 border-pink-300 bg-white">i</button><span class="tooltip-text">GPT-5 Turbo, Thinking mode, priority support</span></div></div>
                 <div class="price-tag text-white text-center py-3 flex items-center justify-center gap-2 pr-8"><span class="text-2xl">🤖</span><h2 class="font-bold text-lg">ChatGPT Pro</h2></div>
               </div>
               <div class="px-5 pt-3 pb-1"><p class="text-xs text-center text-gray-500 bg-pink-50 rounded-lg py-1">Include: GPT Pro, Thinking, Instan</p></div>
@@ -178,7 +322,7 @@
       <div class="absolute inset-0 flex items-center justify-center p-4">
         <div class="card-texture rounded-3xl shadow-2xl w-full max-w-md p-6 relative z-10 border border-pink-100">
           <button onclick="closeInfoModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-xl">✕</button>
-          <div class="text-center mb-5"><span class="text-4xl" id="info-modal-icon">🎨</span><h3 class="font-bold text-xl text-gray-700 mt-3" id="info-modal-title"></h3></div>
+          <div class="text-center mb-5"><span class="text-4xl" id="info-modal-icon"></span><h3 class="font-bold text-xl text-gray-700 mt-3" id="info-modal-title"></h3></div>
           <div id="info-modal-content" class="space-y-3 text-gray-600 text-sm"></div>
         </div>
       </div>
@@ -188,7 +332,7 @@
   <script>
     // ==================== KONFIGURASI ====================
     const SERVER_URL = "https://myclips-worker.myhnvdiscord.workers.dev"; // 🔴 GANTI dengan URL Worker kamu setelah deploy
-    // ===================================================
+    // =====================================================
 
     const productInfo = {
       'Canva Premium': {
@@ -208,12 +352,365 @@
       }
     };
 
-    let selectedProduct, selectedPackage, selectedPrice, needsEmail, isCapCut, capCutQuantities = {};
+    let selectedProduct = null;
+    let selectedPackage = null;
+    let selectedPrice = null;
+    let needsEmail = false;
+    let isCapCut = false;
+    let capCutQuantities = {};
+    let allOrders = [];
+    let currentUserId = 'myclips_user_default';
+    let historySortOrder = 'newest';
+    let countdownInterval = null;
 
-    // ... (semua fungsi JavaScript sama persis seperti kode asli yang kamu kirim, tanpa perubahan) ...
-    // Saya tidak menulis ulang karena akan sangat panjang, tapi semua fungsi di bawah ini tetap persis.
-    // Kamu bisa copy dari kode asli yang sudah ada, yang sudah disertakan di atas. 
-    // Yang penting SERVER_URL sudah diubah.
+    // ---------- Order history (localStorage) ----------
+    function saveOrderToLocalStorage(orderData) {
+      let orders = JSON.parse(localStorage.getItem('myclips_orders') || '[]');
+      orders.push(orderData);
+      localStorage.setItem('myclips_orders', JSON.stringify(orders));
+    }
+    function loadOrdersFromLocalStorage() {
+      const orders = JSON.parse(localStorage.getItem('myclips_orders') || '[]');
+      allOrders = orders.filter(o => o.user_id === currentUserId);
+      updateHistoryDisplay();
+    }
+    function updateSortButtons() {
+      document.getElementById('sort-newest-btn').classList.toggle('active', historySortOrder === 'newest');
+      document.getElementById('sort-oldest-btn').classList.toggle('active', historySortOrder === 'oldest');
+    }
+    function updateHistoryDisplay() {
+      const container = document.getElementById('history-container');
+      updateSortButtons();
+      if (!allOrders.length) {
+        container.innerHTML = '<div class="text-center py-12"><p class="text-gray-400 text-lg">📭 Belum ada pesanan</p></div>';
+        return;
+      }
+      const sorted = [...allOrders].sort((a,b) => historySortOrder === 'oldest' ? new Date(a.order_date) - new Date(b.order_date) : new Date(b.order_date) - new Date(a.order_date));
+      container.innerHTML = sorted.map(order => {
+        const statusClass = order.status === 'completed' ? 'status-completed' : 'status-pending';
+        const statusText = order.status === 'completed' ? '✓ Selesai' : '⏳ Pending';
+        return `<div class="order-item card-texture rounded-xl p-5 border border-pink-100 shadow-md">
+          <div class="flex justify-between items-start gap-4">
+            <div class="flex-1">
+              <div class="flex items-center gap-3 mb-2"><h3 class="font-bold text-lg">${order.product_name}</h3><span class="status-badge ${statusClass}">${statusText}</span></div>
+              <div class="space-y-1 text-sm text-gray-600">
+                <p><span class="font-semibold">Paket:</span> ${order.package}</p>
+                <p><span class="font-semibold">Email:</span> ${order.email}</p>
+                <p><span class="font-semibold">Qty:</span> ${order.quantity}</p>
+                <p class="text-xs text-gray-400">📅 ${new Date(order.order_date).toLocaleString('id-ID')}</p>
+              </div>
+            </div>
+            <div class="text-right"><p class="text-2xl font-bold text-pink-500">Rp ${parseInt(order.total_price).toLocaleString('id-ID')}</p></div>
+          </div>
+        </div>`;
+      }).join('');
+    }
+
+    // ---------- Tab switching ----------
+    document.querySelectorAll('.tab-button').forEach(btn => {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.add('hidden'));
+        this.classList.add('active');
+        document.getElementById(this.dataset.tab + '-tab').classList.remove('hidden');
+      });
+    });
+
+    // ---------- Package selection ----------
+    document.querySelectorAll('.package-option').forEach(option => {
+      option.addEventListener('click', function() {
+        selectedProduct = this.dataset.product;
+        selectedPackage = this.dataset.package;
+        selectedPrice = this.dataset.price;
+        needsEmail = this.dataset.needsEmail === 'true';
+        isCapCut = this.dataset.isCapcut === 'true';
+        document.querySelectorAll('.package-option').forEach(p => p.classList.remove('selected'));
+        this.classList.add('selected');
+        openModal();
+      });
+    });
+
+    // ---------- Info tooltip ----------
+    document.querySelectorAll('.info-tooltip button').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const productName = this.closest('.product-card').querySelector('h2').textContent.trim();
+        openInfoModal(productName);
+      });
+    });
+
+    // ---------- Modals ----------
+    function openModal() {
+      const modal = document.getElementById('email-modal');
+      const icon = document.getElementById('modal-icon');
+      const title = document.getElementById('modal-title');
+      const pkg = document.getElementById('modal-package');
+      const singleSec = document.getElementById('single-email-section');
+      const groupSec = document.getElementById('group-email-section');
+      const capcutSec = document.getElementById('capcut-quantity-section');
+      
+      icon.textContent = selectedProduct.includes('Canva') ? '🎨' : selectedProduct.includes('CapCut') ? '🎬' : '🤖';
+      title.textContent = selectedProduct;
+      pkg.textContent = `${selectedPackage} - Rp ${(parseInt(selectedPrice)/1000)}K`;
+      
+      if (isCapCut) {
+        singleSec.classList.add('hidden');
+        groupSec.classList.add('hidden');
+        capcutSec.classList.remove('hidden');
+        initializeCapCutQuantity();
+        document.getElementById('checkout-btn').disabled = true;
+      } else {
+        capcutSec.classList.add('hidden');
+        if (selectedPackage.includes('Paket Grup')) {
+          singleSec.classList.add('hidden');
+          groupSec.classList.remove('hidden');
+          initializeGroupEmails();
+        } else {
+          singleSec.classList.remove('hidden');
+          groupSec.classList.add('hidden');
+          initializeSingleEmails();
+        }
+        document.getElementById('checkout-btn').disabled = true;
+      }
+      modal.classList.remove('hidden');
+    }
+
+    function closeModal() {
+      document.getElementById('email-modal').classList.add('hidden');
+      document.querySelectorAll('.package-option').forEach(p => p.classList.remove('selected'));
+    }
+
+    function openInfoModal(productName) {
+      const modal = document.getElementById('info-modal');
+      const info = productInfo[productName];
+      if (!info) return;
+      document.getElementById('info-modal-icon').textContent = info.icon;
+      document.getElementById('info-modal-title').textContent = productName;
+      let html = `<div class="bg-pink-50 rounded-xl p-4 space-y-2"><h4 class="font-bold text-gray-700">✨ Fitur Utama:</h4><ul class="space-y-1 ml-2 text-sm">${info.features.map(f=>`<li>✓ ${f}</li>`).join('')}</ul></div>`;
+      if (info.notes) html += `<div class="bg-blue-50 rounded-xl p-4 space-y-2 border-l-4 border-blue-400"><h4 class="font-bold text-gray-700">📝 Penting:</h4><ul class="space-y-1 ml-2 text-xs text-gray-700">${info.notes.map(n=>`<li>${n}</li>`).join('')}</ul></div>`;
+      document.getElementById('info-modal-content').innerHTML = html;
+      modal.classList.remove('hidden');
+    }
+    function closeInfoModal() { document.getElementById('info-modal').classList.add('hidden'); }
+
+    // ---------- CapCut ----------
+    function initializeCapCutQuantity() {
+      const container = document.getElementById('capcut-qty-container');
+      container.innerHTML = '';
+      capCutQuantities = { '7 Hari': 0, '14 Hari': 0, '1 Bulan': 0 };
+      const pkgList = [{ name: '7 Hari', price: 6000 }, { name: '14 Hari', price: 11000 }, { name: '1 Bulan', price: 20000 }];
+      pkgList.forEach(pkg => {
+        const div = document.createElement('div');
+        div.className = 'flex justify-between items-center gap-2 p-3 rounded-xl border-2 border-pink-200 bg-pink-50';
+        div.innerHTML = `<div class="flex-1"><p class="font-semibold text-gray-700 text-sm">${pkg.name}</p><p class="text-pink-500 font-bold text-xs">Rp ${pkg.price.toLocaleString('id-ID')}</p></div>
+        <div class="flex items-center gap-1 bg-white rounded-lg px-2 py-1 border border-pink-200">
+          <button type="button" onclick="decreaseCapCutQty('${pkg.name}')" class="text-pink-500 font-bold text-sm w-5">−</button>
+          <input type="number" class="capcut-qty-input w-8 text-center border-0 bg-transparent font-bold text-gray-700 text-sm" data-package="${pkg.name}" value="0" readonly>
+          <button type="button" onclick="increaseCapCutQty('${pkg.name}')" class="text-pink-500 font-bold text-sm w-5">+</button>
+        </div>`;
+        container.appendChild(div);
+      });
+      document.getElementById('capcut-email').value = '';
+      document.getElementById('capcut-email-error').classList.add('hidden');
+    }
+    window.increaseCapCutQty = function(pkg) {
+      if (capCutQuantities[pkg] < 99) { capCutQuantities[pkg]++; updateCapCutDisplay(pkg); }
+    };
+    window.decreaseCapCutQty = function(pkg) {
+      if (capCutQuantities[pkg] > 0) { capCutQuantities[pkg]--; updateCapCutDisplay(pkg); }
+    };
+    function updateCapCutDisplay(pkg) {
+      document.querySelector(`.capcut-qty-input[data-package="${pkg}"]`).value = capCutQuantities[pkg];
+      updateCapCutTotal();
+      validateCapCutForm();
+    }
+    function updateCapCutTotal() {
+      const priceMap = { '7 Hari': 6000, '14 Hari': 11000, '1 Bulan': 20000 };
+      let total = 0;
+      Object.entries(capCutQuantities).forEach(([pkg, qty]) => total += (priceMap[pkg]||0) * qty);
+      document.getElementById('capcut-total-price').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+    }
+    function validateCapCutForm() {
+      const email = document.getElementById('capcut-email').value.trim();
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const totalQty = Object.values(capCutQuantities).reduce((a,b)=>a+b,0);
+      const errorEl = document.getElementById('capcut-email-error');
+      if (totalQty === 0 || !email || !emailRegex.test(email)) {
+        document.getElementById('checkout-btn').disabled = true;
+        if (email && !emailRegex.test(email)) { errorEl.textContent = 'Format email tidak valid'; errorEl.classList.remove('hidden'); }
+        else errorEl.classList.add('hidden');
+      } else {
+        errorEl.classList.add('hidden');
+        document.getElementById('checkout-btn').disabled = false;
+      }
+    }
+    document.getElementById('capcut-email')?.addEventListener('input', validateCapCutForm);
+
+    // ---------- Single email ----------
+    function initializeSingleEmails() {
+      const container = document.getElementById('single-emails-container');
+      container.innerHTML = '<div class="flex gap-2 items-center"><input type="email" class="flex-1 px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors single-email-input" placeholder="contoh@gmail.com" oninput="validateSingleEmails()"><button type="button" onclick="removeSingleEmailInput(this)" class="text-pink-400 hover:text-pink-600 text-lg font-bold hidden">✕</button></div>';
+      document.getElementById('price-total').classList.add('hidden');
+      document.getElementById('single-email-error').classList.add('hidden');
+      document.getElementById('single-email-success').classList.add('hidden');
+    }
+    window.addSingleEmailInput = function() {
+      const container = document.getElementById('single-emails-container');
+      container.querySelectorAll('button').forEach(b => b.classList.remove('hidden'));
+      const div = document.createElement('div');
+      div.className = 'flex gap-2 items-center';
+      div.innerHTML = '<input type="email" class="flex-1 px-4 py-3 rounded-xl border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors single-email-input" placeholder="contoh@gmail.com" oninput="validateSingleEmails()"><button type="button" onclick="removeSingleEmailInput(this)" class="text-pink-400 hover:text-pink-600 text-lg font-bold">✕</button>';
+      container.appendChild(div);
+      validateSingleEmails();
+    };
+    window.removeSingleEmailInput = function(btn) {
+      const container = document.getElementById('single-emails-container');
+      if (container.children.length > 1) {
+        btn.parentElement.remove();
+        if (container.children.length === 1) container.querySelector('button').classList.add('hidden');
+        validateSingleEmails();
+      }
+    };
+    function validateSingleEmails() {
+      const inputs = document.querySelectorAll('.single-email-input');
+      const emails = Array.from(inputs).map(i => i.value.trim()).filter(e => e);
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const allValid = emails.length > 0 && emails.every(e => emailRegex.test(e));
+      document.getElementById('single-email-error').classList.add('hidden');
+      document.getElementById('single-email-success').classList.add('hidden');
+      document.getElementById('price-total').classList.add('hidden');
+      if (allValid) {
+        document.getElementById('single-email-success').textContent = `✅ ${emails.length} email valid!`;
+        document.getElementById('single-email-success').classList.remove('hidden');
+        const total = parseInt(selectedPrice) * emails.length;
+        document.getElementById('total-price').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+        document.getElementById('price-total').classList.remove('hidden');
+        document.getElementById('checkout-btn').disabled = false;
+      } else {
+        if (emails.length > 0) document.getElementById('single-email-error').classList.remove('hidden');
+        document.getElementById('checkout-btn').disabled = true;
+      }
+    }
+
+    // ---------- Group email ----------
+    function initializeGroupEmails() {
+      const container = document.getElementById('group-emails-container');
+      container.innerHTML = '';
+      for (let i=0; i<15; i++) {
+        const div = document.createElement('div');
+        div.className = 'flex gap-2 items-center';
+        div.innerHTML = `<input type="email" placeholder="Email ${i+1}" class="flex-1 px-3 py-2 rounded-lg border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors text-sm group-email-input" oninput="validateGroupEmails()"><button type="button" onclick="this.parentElement.remove();validateGroupEmails()" class="text-pink-400 hover:text-pink-600 text-lg">✕</button>`;
+        container.appendChild(div);
+      }
+      validateGroupEmails();
+    }
+    window.addGroupEmailInput = function() {
+      const container = document.getElementById('group-emails-container');
+      if (container.children.length >= 15) return;
+      const div = document.createElement('div');
+      div.className = 'flex gap-2 items-center';
+      div.innerHTML = `<input type="email" placeholder="Email ${container.children.length+1}" class="flex-1 px-3 py-2 rounded-lg border-2 border-pink-200 focus:border-pink-400 focus:outline-none transition-colors text-sm group-email-input" oninput="validateGroupEmails()"><button type="button" onclick="this.parentElement.remove();validateGroupEmails()" class="text-pink-400 hover:text-pink-600 text-lg">✕</button>`;
+      container.appendChild(div);
+      validateGroupEmails();
+    };
+    function validateGroupEmails() {
+      const inputs = document.querySelectorAll('.group-email-input');
+      const emails = Array.from(inputs).map(i => i.value.trim()).filter(e => e);
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      const allValid = emails.length > 0 && emails.every(e => emailRegex.test(e));
+      document.getElementById('group-email-error').classList.add('hidden');
+      document.getElementById('group-email-success').classList.add('hidden');
+      if (allValid) {
+        document.getElementById('group-email-success').textContent = `✅ ${emails.length} email valid!`;
+        document.getElementById('group-email-success').classList.remove('hidden');
+        document.getElementById('checkout-btn').disabled = false;
+      } else {
+        if (emails.length > 0) document.getElementById('group-email-error').classList.remove('hidden');
+        document.getElementById('checkout-btn').disabled = true;
+      }
+    }
+
+    // ---------- Checkout & Midtrans ----------
+    async function processCheckout() {
+      let emails = [];
+      let totalPrice = 0;
+      let quantity = 0;
+
+      if (isCapCut) {
+        const email = document.getElementById('capcut-email').value.trim();
+        if (!email) return;
+        emails = [email];
+        const priceMap = { '7 Hari': 6000, '14 Hari': 11000, '1 Bulan': 20000 };
+        Object.entries(capCutQuantities).forEach(([pkg, qty]) => {
+          if (qty > 0) {
+            totalPrice += priceMap[pkg] * qty;
+            quantity += qty;
+          }
+        });
+        if (totalPrice === 0) return;
+      } else if (selectedPackage.includes('Paket Grup')) {
+        const inputs = document.querySelectorAll('.group-email-input');
+        emails = Array.from(inputs).map(i => i.value.trim()).filter(e => e);
+        if (!emails.length) return;
+        totalPrice = parseInt(selectedPrice);
+        quantity = emails.length;
+      } else {
+        const inputs = document.querySelectorAll('.single-email-input');
+        emails = Array.from(inputs).map(i => i.value.trim()).filter(e => e);
+        if (!emails.length) return;
+        totalPrice = parseInt(selectedPrice) * emails.length;
+        quantity = emails.length;
+      }
+
+      try {
+        const response = await fetch(`${SERVER_URL}/api/buat-transaksi`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            product: selectedProduct,
+            package: selectedPackage,
+            email: emails.join(', '),
+            price: totalPrice,
+            quantity: quantity
+          })
+        });
+        const data = await response.json();
+        if (!data.token) throw new Error('Token tidak didapat');
+
+        window.snap.pay(data.token, {
+          onSuccess: function() {
+            showToast('Pembayaran berhasil! Undangan akan dikirim otomatis.', 'success');
+            closeModal();
+            setTimeout(() => location.reload(), 3000);
+          },
+          onPending: function() { showToast('Menunggu pembayaran...', 'info'); },
+          onError: function() { showToast('Pembayaran gagal.', 'error'); },
+          onClose: function() { showToast('Popup ditutup.', 'info'); }
+        });
+      } catch (error) {
+        showToast('Gagal terhubung ke server. Coba lagi.', 'error');
+        console.error(error);
+      }
+    }
+
+    function showToast(message, type='info') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `toast px-4 py-3 rounded-xl shadow-lg ${type === 'success' ? 'bg-green-500' : 'bg-pink-500'} text-white font-medium text-sm`;
+      toast.textContent = message;
+      container.appendChild(toast);
+      setTimeout(() => { toast.style.animation = 'slideIn 0.3s ease reverse'; setTimeout(() => toast.remove(), 300); }, 3000);
+    }
+
+    // ---------- Initialization ----------
+    function initializeApp() {
+      loadOrdersFromLocalStorage();
+      document.getElementById('sort-newest-btn').addEventListener('click', ()=>{ historySortOrder='newest'; updateHistoryDisplay(); });
+      document.getElementById('sort-oldest-btn').addEventListener('click', ()=>{ historySortOrder='oldest'; updateHistoryDisplay(); });
+    }
+
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initializeApp);
+    else initializeApp();
   </script>
 </body>
 </html>
